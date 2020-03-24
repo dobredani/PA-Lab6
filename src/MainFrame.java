@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 
@@ -17,12 +18,16 @@ public class MainFrame extends JFrame {
 
         //create the components
         canvas = new DrawingPanel(this);
- //...TODO
 
         //arrange the components in the container (frame)
         //JFrame uses a BorderLayout by default
         add(canvas, BorderLayout.CENTER); //this is BorderLayout.CENTER
- //...TODO
+
+        configPanel = new ConfigPanel(this);
+        add(configPanel, BorderLayout.NORTH);
+
+        controlPanel = new ControlPanel(this);
+        add(controlPanel,BorderLayout.SOUTH);
 
         //invoke the layout manager
         pack();

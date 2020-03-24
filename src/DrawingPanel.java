@@ -32,10 +32,10 @@ public class DrawingPanel extends JPanel {
     private void drawShape(int x, int y) {
         Random random = new Random();
         int radius = random.nextInt(1000); //generate a random number
-        int sides = ...TODO; //get the value from UI (in ConfigPanel)
+        //int sides = ...TODO; //get the value from UI (in ConfigPanel)
         Color color = new Color(random.nextInt(0xFFFFFF)); //create a transparent random Color.
         graphics.setColor(color);
-        graphics.fill(new RegularPolygon(x, y, radius, sides));
+        //graphics.fill(new RegularPolygon(x, y, radius, sides));
     }
     @Override
     public void update(Graphics g) { } //Why did I do that?
