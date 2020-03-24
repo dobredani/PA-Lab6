@@ -35,13 +35,25 @@ public class ControlPanel extends JPanel {
 
     private void save(ActionEvent e) {
         try {
-            ImageIO.write( frame.canvas.image, "PNG", new File("d:/test.png"));
+            FileDialog fileDialog = new FileDialog(frame, "Save",FileDialog.SAVE);
+            fileDialog.setFile("*.jpg");
+            fileDialog.setVisible(true);
+            File file = new File( fileDialog.getDirectory() + fileDialog.getFile());
+
+            ImageIO.write( frame.canvas.image, "PNG", file);
         } catch (IOException ex) { System.err.println(ex); }
     }
 
     private void load(ActionEvent e){
         try {
-            frame.canvas.image = ImageIO.read(new File("d:/test.png"));
+            FileDialog fileDialog = new FileDialog(frame, "Keep calm and select a file",FileDialog.LOAD);
+            fileDialog.setDirectory("D:\\");
+            fileDialog.setFile("*.png");
+            fileDialog.setVisible(true);
+            File file = new File("D:\\" + fileDialog.getFile());
+
+            if (file != null)
+                frame.canvas.loadImage(ImageIO.read(file));
         }
         catch (IOException ex)
         {

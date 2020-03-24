@@ -1,11 +1,16 @@
+import com.sun.org.apache.bcel.internal.generic.JsrInstruction;
+
 import javax.swing.*;
+import java.awt.*;
 
 public class ConfigPanel extends JPanel {
     final MainFrame frame;
     JLabel label; // we’re drawing regular polygons
-    JLabel labelColor;
+    JLabel labelShape;
+    JLabel labelSize;
     private JSpinner sidesField; // number of sides
-    private JComboBox colorCombo; // the color of the shape
+    private JSlider sizeField; // number of sides
+    private JComboBox shapeCombo; // the color of the shape
 
     public ConfigPanel(MainFrame frame) {
         this.frame = frame;
@@ -14,17 +19,27 @@ public class ConfigPanel extends JPanel {
     private void init() {
         //create the label and the spinner
         label = new JLabel("Number of sides:");
-        setSidesField(new JSpinner(new SpinnerNumberModel(0, 0, 100, 1)));
+        setSidesField(new JSpinner(new SpinnerNumberModel(6, 3, 100, 1)));
         getSidesField().setValue(6); //default number of sides
 
-        labelColor = new JLabel("Color:");
-        setColorCombo(new JComboBox());
-        getColorCombo().setPrototypeDisplayValue("text here");
-        getColorCombo().setSize(400,30);
+        labelSize = new JLabel("Size:");
+        setSizeField(new JSlider(JSlider.HORIZONTAL,5,100,25));
+        getSizeField().setValue(30); //default size
+
+        labelShape = new JLabel("Shape:");
+        setShapeCombo(new JComboBox());
+        getShapeCombo().setPrototypeDisplayValue("text here");
+        getShapeCombo().setPreferredSize(new Dimension(200,30 ));
+        getShapeCombo().addItem("Regular Polygon");
+        getShapeCombo().addItem("Node Shape");
+        getShapeCombo().setSelectedIndex(1);
+
         add(label); //JPanel uses FlowLayout by default
         add(getSidesField());
-        add(labelColor);
-        add(getColorCombo());
+        add(labelSize);
+        add(getSizeField());
+        add(labelShape);
+        add(getShapeCombo());
     }
 
     public JSpinner getSidesField() {
@@ -35,11 +50,19 @@ public class ConfigPanel extends JPanel {
         this.sidesField = sidesField;
     }
 
-    public JComboBox getColorCombo() {
-        return colorCombo;
+    public JComboBox getShapeCombo() {
+        return shapeCombo;
     }
 
-    public void setColorCombo(JComboBox colorCombo) {
-        this.colorCombo = colorCombo;
+    public void setShapeCombo(JComboBox shapeCombo) {
+        this.shapeCombo = shapeCombo;
+    }
+
+    public JSlider getSizeField() {
+        return sizeField;
+    }
+
+    public void setSizeField(JSlider sizeField) {
+        this.sizeField = sizeField;
     }
 }

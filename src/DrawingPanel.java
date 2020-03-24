@@ -31,11 +31,15 @@ public class DrawingPanel extends JPanel {
     }
     private void drawShape(int x, int y) {
         Random random = new Random();
-        int radius = random.nextInt(100); //generate a random number
+        int radius = ((int) frame.configPanel.getSizeField().getValue()); //random.nextInt(100); //generate a random number
         int sides = ((int) frame.configPanel.getSidesField().getValue()); //get the value from UI (in ConfigPanel)
-        Color color = new Color(random.nextInt(0xFFFFFF)); //create a transparent random Color.
+        Color color = new Color(random.nextInt(0xFF),random.nextInt(0xFF),random.nextInt(0xFF),random.nextInt(0xFF)); //create a transparent random Color.
         graphics.setColor(color);
-        graphics.fill(new RegularPolygon(x, y, radius, sides));
+
+        if (frame.configPanel.getShapeCombo().getSelectedItem().toString().equals("Regular Polygon"))
+            graphics.fill(new RegularPolygon(x, y, radius, sides));
+        if (frame.configPanel.getShapeCombo().getSelectedItem().toString().equals("Node Shape"))
+            graphics.fill(new NodeShape(x, y, radius, sides));
     }
     @Override
     public void update(Graphics g) {
@@ -47,9 +51,16 @@ public class DrawingPanel extends JPanel {
         g.drawImage(image, 0, 0, this);
     }
 
+    public void loadImage(BufferedImage image){
+        this.image = image;
+        graphics = this.image.createGraphics();
+        repaint();
+    }
+
     public void reset()
     {
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0,0,W, H);
+        repaint();
     }
 }
