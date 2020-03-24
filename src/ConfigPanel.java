@@ -4,8 +4,8 @@ public class ConfigPanel extends JPanel {
     final MainFrame frame;
     JLabel label; // we’re drawing regular polygons
     JLabel labelColor;
-    JSpinner sidesField; // number of sides
-    JComboBox colorCombo; // the color of the shape
+    private JSpinner sidesField; // number of sides
+    private JComboBox colorCombo; // the color of the shape
 
     public ConfigPanel(MainFrame frame) {
         this.frame = frame;
@@ -14,16 +14,32 @@ public class ConfigPanel extends JPanel {
     private void init() {
         //create the label and the spinner
         label = new JLabel("Number of sides:");
-        sidesField = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
-        sidesField.setValue(6); //default number of sides
+        setSidesField(new JSpinner(new SpinnerNumberModel(0, 0, 100, 1)));
+        getSidesField().setValue(6); //default number of sides
 
         labelColor = new JLabel("Color:");
-        colorCombo = new JComboBox();
-        colorCombo.setPrototypeDisplayValue("text here");
-        colorCombo.setSize(400,30);
+        setColorCombo(new JComboBox());
+        getColorCombo().setPrototypeDisplayValue("text here");
+        getColorCombo().setSize(400,30);
         add(label); //JPanel uses FlowLayout by default
-        add(sidesField);
+        add(getSidesField());
         add(labelColor);
-        add(colorCombo);
+        add(getColorCombo());
+    }
+
+    public JSpinner getSidesField() {
+        return sidesField;
+    }
+
+    public void setSidesField(JSpinner sidesField) {
+        this.sidesField = sidesField;
+    }
+
+    public JComboBox getColorCombo() {
+        return colorCombo;
+    }
+
+    public void setColorCombo(JComboBox colorCombo) {
+        this.colorCombo = colorCombo;
     }
 }
